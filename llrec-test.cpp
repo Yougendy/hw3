@@ -86,10 +86,36 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
-
-
-
+ // -------------------------------
+    // Test `llpivot`
+    // -------------------------------
+    Node* smaller = nullptr;
+    Node* larger = nullptr;
+    int pivot = 10;  // Change this as needed for testing
+    llpivot(head, smaller, larger, pivot);
     
+    cout << "Pivot: " << pivot << endl;
+    cout << "Smaller or equal list: ";
+    print(smaller);
+    cout << "Larger list: ";
+    print(larger);
+
+    // -------------------------------
+    // Test `llfilter`
+    // -------------------------------
+    struct OddPredicate {
+        bool operator()(int value) { return value % 2 != 0; }
+    };
+    
+    Node* filteredList = llfilter(smaller, OddPredicate());
+    cout << "Filtered list (evens only): ";
+    print(filteredList);
+
+    // -------------------------------
+    // Deallocate memory
+    // -------------------------------
+    dealloc(larger);
+    dealloc(filteredList); // `smaller` is now filtered, so we deallocate `filteredList`
     return 0;
 
 }
